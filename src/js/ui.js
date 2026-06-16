@@ -1,7 +1,5 @@
-/**
- * MovieManiac Interface Document Modification Engine
- * Programmatically assembles semantic DOM structures.
- */
+/* MovieManiac Interface Document Modification Engine*/
+
 export class UiController {
     constructor(gridContainerId, modalId, modalContentId) {
         this.grid = document.getElementById(gridContainerId);
@@ -21,9 +19,7 @@ export class UiController {
         this.grid.appendChild(loaderWrapper);
     }
 
-    /**
-     * Render the movie cards grid layout
-     */
+    /* movie cards layout */
     renderGrid(moviesList, watchlistIds = []) {
         this.grid.innerHTML = '';
         if (moviesList.length === 0) {
@@ -40,11 +36,11 @@ export class UiController {
             // 3D Flip Card Frame Base Context Structure
             const cardFrame = document.createElement('article');
             cardFrame.className = 'flip-card card-entrance';
-            cardFrame.style.animationDelay = `${index * 0.05}s`; // Staggered entry animation
+            cardFrame.style.animationDelay = `${index * 0.05}s`;  
 
             const cardInner = document.createElement('div');
             cardInner.className = 'flip-card-inner';
-            cardInner.dataset.id = movie.id; // Target parameter matching configuration for click events
+            cardInner.dataset.id = movie.id;  
 
             // Front Card Representation
             const frontFace = document.createElement('div');
@@ -133,9 +129,7 @@ export class UiController {
         });
     }
 
-    /**
-     * Render the extended modal overlay details panel (8+ Unique Attributes shown)
-     */
+    /* show overlay details panel  Unique Attributes shown */
     renderModal(details) {
         this.modalContent.innerHTML = '';
 

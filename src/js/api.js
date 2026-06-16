@@ -1,19 +1,14 @@
-/**
- * MovieManiac API Data Orchestration Layer Engine
- * Connects seamlessly to both TMDb and OMDb REST APIs.
- */
+/* TMDb and OMDb APIs.*/
 export class ApiService {
     constructor() {
-        // Replace with your real API keys
+        // My API keys
         this.tmdbKey = '1a85fd28c4c398e4ece5840bcfc183e1';
         this.omdbKey = '963d9b4f';
         this.tmdbBaseUrl = 'https://api.themoviedb.org/3';
         this.omdbBaseUrl = 'https://www.omdbapi.com/';
     }
 
-    /**
-     * Fetch trending weekly movies from TMDb API (Endpoint 1)
-     */
+    /*(Endpoint 1): Fetch trending weekly movies from TMDb API*/
     async fetchTrendingMovies() {
         try {
             const response = await fetch(`${this.tmdbBaseUrl}/trending/movie/week?api_key=${this.tmdbKey}`);
@@ -26,9 +21,9 @@ export class ApiService {
         }
     }
 
-    /**
-     * Query specialized matching targets via text queries on TMDb (Endpoint 2)
-     */
+
+
+    /*(Endpoint 2): Query specialized matching targets via text queries on TMDb*/
     async searchMovies(query) {
         try {
             const response = await fetch(`${this.tmdbBaseUrl}/search/movie?api_key=${this.tmdbKey}&query=${encodeURIComponent(query)}`);
@@ -41,9 +36,7 @@ export class ApiService {
         }
     }
 
-    /**
-     * Pull absolute ID records from unique resource pathways (Endpoint 3)
-     */
+    /*(Endpoint 3): Pull absolute ID records  */
     async fetchMovieDetails(tmdbId) {
         try {
             const detailRes = await fetch(`${this.tmdbBaseUrl}/movie/${tmdbId}?api_key=${this.tmdbKey}`);
@@ -57,7 +50,7 @@ export class ApiService {
                 if (omdbRes.ok) omdbData = await omdbRes.json();
             }
 
-            // Normalizes final unified object capturing exactly 8+ unique properties
+            // Normalizes final unified object capturing unique properties
             return {
                 id: tmdbData.id,
                 title: tmdbData.title,
@@ -78,11 +71,8 @@ export class ApiService {
         }
     }
 
-    /**
-     * Map bulk query lists into unified array sets
-     */
+    /* query lists into unified array sets */
     async _hydrateMovies(resultsList) {
-        // Enforce parsing constraints to ensure stability
         return resultsList.map(movie => ({
             id: movie.id,
             title: movie.title,

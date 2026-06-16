@@ -1,7 +1,5 @@
-/**
- * MovieManiac Local Storage Persistent State Management Framework
- * Captures 4 unique user property profiles across operational instances.
- */
+/*MovieManiac Local Storage Persistent State Management Framework */
+
 export class StorageService {
     constructor() {
         this.PREFIX = 'movie_maniac_';
@@ -23,9 +21,9 @@ export class StorageService {
         const index = currentList.findIndex(item => item.id === movieObj.id);
 
         if (index > -1) {
-            currentList.splice(index, 1); // Remove if found
+            currentList.splice(index, 1);  
         } else {
-            currentList.push(movieObj);   // Add if missing
+            currentList.push(movieObj);    
         }
         localStorage.setItem(this.KEYS.WATCHLIST, JSON.stringify(currentList));
         return currentList;

@@ -2,22 +2,18 @@ import { ApiService } from './api.js';
 import { StorageService } from './storage.js';
 import { UiController } from './ui.js';
 
-/**
- * Main Orchestration Layer Application Setup Block
- */
+/*Layer Application Setup Block */
 class MovieManiacApp {
     constructor() {
         this.api = new ApiService();
         this.storage = new StorageService();
         this.ui = new UiController('movieGrid', 'movieModal', 'modalContent');
 
-        this.currentView = 'trending'; // Internal view tracking state toggle
-        this.activeMoviesBuffer = [];  // Runtime storage cache for local operations
+        this.currentView = 'trending'; 
+        this.activeMoviesBuffer = [];   
     }
 
-    /**
-     * Start the application lifecycle and hook up event listeners
-     */
+    /*Start the application lifecycle and hook up event listeners*/
     async init() {
         this.setupEventHub();
         this.applyTheme(this.storage.getTheme());
@@ -37,9 +33,7 @@ class MovieManiacApp {
         }
     }
 
-    /**
-     * Bind 5+ Unique Operational Framework Interaction Events
-     */
+    /*Bind Unique Operational Framework Interaction Events */
     setupEventHub() {
         // Event 1: Dom Submit Form Processing Execution
         document.getElementById('searchForm').addEventListener('submit', async (e) => {
@@ -57,7 +51,7 @@ class MovieManiacApp {
             this.applyLocalRenderFilters();
         });
 
-        // Event 3: Central Grid Wrapper Click Delegation (Handles modal popup details & watchlist updates)
+        // Event 3: Handles modal popup details and watchlist updates
         document.getElementById('movieGrid').addEventListener('click', async (e) => {
             const targetButton = e.target.closest('.action-watchlist-btn');
             const targetCard = e.target.closest('.flip-card-inner');
@@ -92,7 +86,7 @@ class MovieManiacApp {
         document.getElementById('showTrendingBtn').addEventListener('click', () => this.switchViewMode('trending'));
         document.getElementById('showWatchlistBtn').addEventListener('click', () => this.switchViewMode('watchlist'));
 
-        // Theme Click Activations (Mobile + Desktop variants combined)
+        // Theme Click Activations 
         const toggleThemeLogic = () => {
             const targetedNextMode = this.storage.getTheme() === 'dark' ? 'light' : 'dark';
             this.applyTheme(targetedNextMode);
@@ -184,7 +178,7 @@ class MovieManiacApp {
     }
 }
 
-// Instantiate and initialize the app once the document has fully loaded
+// initialize the app once the document has fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     const app = new MovieManiacApp();
     app.init();
